@@ -5,6 +5,7 @@ using Infraestructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using static ApplicationCore.Interfaces.IEstudianteServices;
 
 namespace Infraestructure.Persistence
 {
@@ -29,6 +30,7 @@ namespace Infraestructure.Persistence
 
             //Add services
             services.AddTransient<IDashboardService, DashboardService>();
+            services.AddTransient<IEstudianteServices, EstudianteService>();
 
             //End services
 
