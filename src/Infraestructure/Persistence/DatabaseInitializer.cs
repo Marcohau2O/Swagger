@@ -41,10 +41,10 @@ namespace Infraestructure.Persistence
 
         private async Task InitializeTenantDbAsync(CancellationToken cancellationToken)
         {
-            if (_tenantDbContext.Database.GetPendingMigrations().Any())
-            {
-                await _tenantDbContext.Database.MigrateAsync(cancellationToken);
-            }
+            //if (_tenantDbContext.Database.GetPendingMigrations().Any())
+            //{
+            //    await _tenantDbContext.Database.MigrateAsync(cancellationToken);
+            //}
 
         }
 
