@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using DevExpress.DataAccess.ObjectBinding;
 
 namespace Infraestructure.Services
 {
@@ -177,6 +178,37 @@ namespace Infraestructure.Services
             catch (Exception ex)
             {
                 return new Response<int>(0, "Error al Eliminar el Estudiante: " + ex.Message);
+            }
+        }
+
+        public async Task<byte[]> GetPDF()
+        {
+            ObjectDataSource source = new ObjectDataSource();
+
+            var report = new ApplicationCore.PDF.Report1();
+
+
+            var estudiantes = await (from e in _dbContext.Estudiante
+                                     select new EstudianteDto
+                                     {
+                                         IdEstudiante = e.Id,
+                                         edad = e.edad,
+                                         nombre = e.nombre,
+                                         correo = e.correo,
+                                     }).ToListAsync();
+
+            EstudiantesPDFDTO reportePdf = new EstudiantesPDFDTO();
+            reportePdf.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+            reportePdf.Hora = DateTime.Now.ToString("hh:mm");
+            reportePdf.Estudiantes = estudiantes;
+
+            source.DataSource = reportePdf;
+            report.DataSource = source;
+            using (var memory = new MemoryStream())
+            {
+                await report.ExportToPdfAsync(memory);
+                memory.Position = 0;
+                return memory.ToArray();
             }
         }
     }

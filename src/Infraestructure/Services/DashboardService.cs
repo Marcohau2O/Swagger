@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Sockets;
 using System.Net;
 using ApplicationCore.Commands;
+using DevExpress.DataAccess;
 
 namespace Infraestructure.Services
 {

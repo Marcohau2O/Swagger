@@ -17,5 +17,7 @@ namespace ApplicationCore.Interfaces
 
         Task<Response<int>> DeleteEstudiante(int Id);
 
+        Task<Byte[]> GetPDF();
+
     }
 }

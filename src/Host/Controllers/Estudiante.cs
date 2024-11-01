@@ -44,5 +44,12 @@ namespace Host.Controllers
             var result = await _service.DeleteEstudiante(Id);
             return Ok(result);
         }
+
+        [HttpGet("pdf")]
+        public async Task<ActionResult> GetPDF()
+        {
+            var pdfFile = await _service.GetPDF();
+            return File(pdfFile, "aplication/pdf", "Estudiantes.pdf");
+        }
     }
 }
