@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Interfaces;
+using Infraestructure.Persistance.ColaboradorService;
 using Infraestructure.Services;
 //using Infraestructure.Services;
 using Infraestructure.Settings;
@@ -31,6 +32,7 @@ namespace Infraestructure.Persistence
             //Add services
             services.AddTransient<IDashboardService, DashboardService>();
             services.AddTransient<IEstudianteServices, EstudianteService>();
+            services.AddTransient<IColaborardorService, ColaboradorService>();
 
             //End services
 
