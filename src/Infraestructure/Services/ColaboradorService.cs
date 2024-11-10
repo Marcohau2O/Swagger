@@ -108,7 +108,90 @@ namespace Infraestructure.Persistance.ColaboradorService
             }
         }
 
+        public async Task<Response<List<Colaboradores>>> GetColaboradoresPorTipo(bool isProfesor)
+        {
+            Response<List<Colaboradores>> response = new();
+
+            try
+            {
+                if (isProfesor)
+                {
+                    var profesores = await _context.Colaboradores
+                        .Where(c => c.IsProfesor)
+                        .Include(c => c.Profesor)
+                        .ToListAsync();
+
+                    response.Result = profesores;
+                    response.Message = "Lista de profesores obtenida correctamente.";
+                }
+                else
+                {
+                    var administrativos = await _context.Colaboradores
+                        .Where(c => !c.IsProfesor)
+                        .Include(c => c.Administrativo)
+                        .ToListAsync();
+
+                    response.Result = administrativos;
+                    response.Message = "Lista de administrativos obtenida correctamente.";
+                }
+
+                response.Succeeded = true;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Succeeded = false;
+                response.Message = "Error al obtener la lista de colaboradores: " + ex.Message;
+                response.Result = null;
+                return response;
+            }
+        }
 
 
+        public async Task<Response<List<Colaboradores>>> GetColaboradoresPorFechaIngreso(DateTime FechaCreacion)
+        {
+            Response<List<Colaboradores>> response = new();
+
+            try
+            {
+                var result = await _context.Colaboradores
+                    .Where(c => c.FechaCreacion >= FechaCreacion && c.FechaCreacion <= FechaCreacion)
+                    .ToListAsync();
+
+                response.Result = result;
+                response.Message = "Listas de colaboradores obtenidas correctamente";
+                response.Succeeded= true;
+            }
+            catch (Exception e)
+            {
+                response.Succeeded = false;
+                response.Message = "Falla al obtener los colaboradores" + e.Message;
+            }
+            
+            return response;
+        }
+
+        public async Task<Response<List<Colaboradores>>> GetColaboradoresEdad(int Edad)
+        {
+            Response<List<Colaboradores>> response = new();
+
+            try
+            {
+                var result = await _context.Colaboradores
+                    .Where(c => c.Edad == Edad)
+                    .ToListAsync();
+
+                response.Result = result;
+                response.Message = "Lista de colaboradores obtenidas correctamente";
+                response.Succeeded= true;
+            }
+            catch (Exception ex)
+            {
+                response.Succeeded = false;
+                response.Message= "Falla al obtener los colaboradores" + ex.Message;
+            }
+
+            return response;
+        }
     }
 }

@@ -16,5 +16,8 @@ namespace Domain.Entities
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaInicio { get; set; }  
         public DateTime FechaFin {  get; set; }
+        public Profesor Profesor { get; set; }
+        public Administrativo Administrativo { get; set; }
+
     }
 }

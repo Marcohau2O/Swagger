@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
@@ -13,5 +14,8 @@ namespace Domain.Entities
         public string Correo { get; set; }
         public string Puesto { get; set; }
         public int Nomina { get; set; }
+
+        [JsonIgnore]
+        public Colaboradores Colaboradores { get; set; }
     }
 }

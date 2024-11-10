@@ -26,6 +26,16 @@ namespace Infraestructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Profesor>()
+                .HasOne(p => p.Colaboradores)
+                .WithOne(c => c.Profesor)
+                .HasForeignKey<Profesor>(p => p.FkColaborador);
+
+            modelBuilder.Entity<Administrativo>()
+                .HasOne(a => a.Colaboradores)
+                .WithOne(c => c.Administrativo)
+                .HasForeignKey<Administrativo>(a => a.FkColaborador);
+
         }      
     }
 }

@@ -15,8 +15,9 @@ namespace ApplicationCore.Interfaces
         Task<Response<object>> CreateColaborador(Colaboradores colaboradores);
 
         Task<Response<List<Colaboradores>>> GetColaboradoresPorFecha(DateTime FechaInicio, DateTime FechaFin);
-
-        //Task<bool> AddToProfesorTable(Profesores profesor);
+        Task<Response<List<Colaboradores>>> GetColaboradoresPorFechaIngreso(DateTime FechaCreacion);
+        Task<Response<List<Colaboradores>>> GetColaboradoresEdad(int Edad);
+        Task<Response<List<Colaboradores>>> GetColaboradoresPorTipo(bool isProfesor);
         //Task<bool> AddToAdministradorTable(Administradores administrador);
         // Task FiltrarColaboradores(DateTime fechaInicio, DateTime fechaFin, bool esProfesor);
     }
