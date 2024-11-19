@@ -22,6 +22,7 @@ namespace Infraestructure.Persistence
         public DbSet <Colaboradores> Colaboradores { get; set; }
         public DbSet<Profesor> Profesor { get; set; }
         public DbSet<Administrativo> Administrativo { get; set; }
+        public DbSet<FormularioContacto> FormularioContactos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

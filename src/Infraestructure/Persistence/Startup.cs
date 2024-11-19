@@ -33,6 +33,8 @@ namespace Infraestructure.Persistence
             services.AddTransient<IDashboardService, DashboardService>();
             services.AddTransient<IEstudianteServices, EstudianteService>();
             services.AddTransient<IColaborardorService, ColaboradorService>();
+            services.AddTransient<IFormularioContactoService, FormularioContactoService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             //End services
 
